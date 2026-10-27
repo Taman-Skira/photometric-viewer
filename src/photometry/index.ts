@@ -21,6 +21,8 @@ export {
 } from './formats/convert';
 
 export interface LoadedPhotometry {
+  /** Decoded file contents, kept for converting to the other format. */
+  text: string;
   data: PhotometricData;
   sample: IntensitySampler;
   stats: PhotometricStats;
@@ -34,7 +36,7 @@ export function parsePhotometricText(text: string, fileName: string): LoadedPhot
   const sample = createIntensitySampler(data);
   const stats = computeStats(data, sample);
   if (!(stats.maxIntensity > 0)) throw new Error('The intensity table contains no light');
-  return { data, sample, stats };
+  return { text, data, sample, stats };
 }
 
 export async function loadPhotometricFile(file: File): Promise<LoadedPhotometry> {

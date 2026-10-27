@@ -10,6 +10,7 @@ import {
 import { tv } from '../strings';
 import { PhotometricRenderer, type FrameInfo, type LuminaireShape, type PointHit, type ViewMode } from './engine/renderer';
 import { autoRotation, buildScene, CEILING_CLEARANCE, roomMountLimit, type SceneId, type SceneParams } from './engine/scenes';
+import ConvertDownload from './ConvertDownload';
 import PolarDiagram from './PolarDiagram';
 import { IconButton, Section, Segmented, Slider, Toggle } from './ui';
 
@@ -519,6 +520,7 @@ const PhotometricViewer: React.FC = () => {
                 {[meta?.manufacturer, meta?.catalog, photometry.data.format.toUpperCase()].filter(Boolean).join(' · ')}
               </p>
               {photometry.data.warnings.includes('notTypeC') && <p className="mt-2 text-xs text-amber-300/80">{tv('notTypeC')}</p>}
+              <ConvertDownload photometry={photometry} />
             </div>
           )}
         </Section>

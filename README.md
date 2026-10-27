@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Then open the URL Vite prints. Drop a `.ies` or `.ldt` file onto the page, or start from one of the included samples.
+Then open the URL Vite prints. Drop a `.ies` or `.ldt` file onto the page, or start from one of the included samples. **Download as IES / LDT** under the luminaire converts the open file to the other format, also in the browser.
 
 ```bash
 npm run build
