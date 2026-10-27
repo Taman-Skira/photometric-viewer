@@ -9,7 +9,7 @@ void main() {
 
 /**
  * Progressive path tracer over analytic primitives (ground plane + AABBs).
- * Ported from taman-frontend's WGSL tracer: PCG RNG, GGX/Lambert BSDF, NEE
+ * PCG RNG, GGX/Lambert BSDF, NEE
  * with Li = candela / r^2 and IES lookup in the Type C lamp frame
  * (gamma = acos(-z), C = atan2(-x, y)).
  *

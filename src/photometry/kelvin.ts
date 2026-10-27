@@ -1,6 +1,5 @@
 /**
  * Correlated color temperature (CCT, kelvin) -> linear sRGB tint.
- * Ported from taman-frontend's real-time renderer (pathtracer/kelvin.ts):
  * Kim et al. Planckian locus fit, anchored so 6500K is neutral and
  * luminance-normalized so temperature only shifts hue.
  */

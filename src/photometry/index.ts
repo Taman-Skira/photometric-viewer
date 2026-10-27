@@ -1,3 +1,4 @@
+import { detectFormat, decodePhotometricBytes } from './formats/detect';
 import { parseIes } from './parseIes';
 import { parseLdt } from './parseLdt';
 import { createIntensitySampler, type IntensitySampler } from './sampler';
@@ -8,26 +9,21 @@ export type { PhotometricData, PhotometricStats, Symmetry, PhotometricFormat } f
 export type { IntensitySampler } from './sampler';
 export { buildIntensityTexture, type IntensityTexture } from './texture';
 export { kelvinToLinearRgb, kelvinToCssHex } from './kelvin';
+export { decodePhotometricBytes, detectFormat, formatFromFileName, replaceExtension } from './formats/detect';
+export { readIes, writeIes, iesKeyword, type IesFile, type IesKeyword, type IesTilt } from './formats/ies';
+export { readLdt, writeLdt, type LdtFile, type LdtLampSet } from './formats/ldt';
+export {
+  convertPhotometricText,
+  iesToLdt,
+  ldtToIes,
+  type ConversionResult,
+  type ConversionWarning,
+} from './formats/convert';
 
 export interface LoadedPhotometry {
   data: PhotometricData;
   sample: IntensitySampler;
   stats: PhotometricStats;
-}
-
-export function decodePhotometricBytes(bytes: Uint8Array): string {
-  try {
-    return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
-  } catch {
-    return new TextDecoder('windows-1252').decode(bytes);
-  }
-}
-
-export function detectFormat(text: string, fileName: string): 'ies' | 'ldt' {
-  const ext = fileName.toLowerCase().split('.').pop();
-  if (ext === 'ies') return 'ies';
-  if (ext === 'ldt' || ext === 'eul') return 'ldt';
-  return /^\s*IESNA|(^|\n)\s*TILT\s*=/i.test(text) ? 'ies' : 'ldt';
 }
 
 export function parsePhotometricText(text: string, fileName: string): LoadedPhotometry {

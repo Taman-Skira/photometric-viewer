@@ -18,6 +18,14 @@ npm run build
 npm run preview
 ```
 
+## Tests
+
+```bash
+npm test
+```
+
+The IES and EULUMDAT readers, writers and the IES <-> LDT converter live in `src/photometry/formats`. They run in the browser and in Node and are tested against the sample files.
+
 ## Samples
 
 The files in `public/photometry` are there so the page is useful before you open your own file. They include a Taman street optimization and a few other luminaires: a traditional street light, a spot, a downlight, a wall washer, and a linear pendant.
