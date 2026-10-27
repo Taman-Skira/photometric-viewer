@@ -1,12 +1,17 @@
 {
   "name": "photometric-viewer",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "license": "MIT",
+  "bin": {
+    "photometric-viewer": "dist-cli/photometric-viewer.js"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json && vite build",
+    "build": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json && vite build && npm run build:cli",
+    "build:cli": "vite build -c vite.cli.config.ts",
+    "prepare": "npm run build:cli",
     "preview": "vite preview",
     "lint": "oxlint",
     "test": "vitest run"

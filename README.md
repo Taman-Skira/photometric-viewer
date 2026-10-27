@@ -18,6 +18,17 @@ npm run build
 npm run preview
 ```
 
+## Convert IES <-> LDT from the command line
+
+```bash
+npx github:Taman-Skira/photometric-viewer convert input.ies output.ldt
+npx github:Taman-Skira/photometric-viewer convert input.ldt            # writes input.ies
+```
+
+The formats follow the file extensions. Intensities, angles, symmetry, flux, power and dimensions carry over; metadata without a matching field in the target format is reported as a warning. Use `--force` to overwrite an existing output file and `--quiet` to hide warnings.
+
+From a checkout, `npm run build:cli` builds `dist-cli/photometric-viewer.js`, which you can run with `node`.
+
 ## Tests
 
 ```bash

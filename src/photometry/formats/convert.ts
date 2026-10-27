@@ -338,11 +338,19 @@ export function ldtToIes(ldt: LdtFile): Converted<IesFile> {
   return { file, warnings };
 }
 
-/** Converts IES text to LDT text or back. The target defaults to the other format. */
-export function convertPhotometricText(text: string, fileName: string, target?: PhotometricFormat): ConversionResult {
+/**
+ * Converts IES text to LDT text or back. The target defaults to the other format and the
+ * output name (also written into the LDT file name field) to `fileName` with its extension.
+ */
+export function convertPhotometricText(
+  text: string,
+  fileName: string,
+  target?: PhotometricFormat,
+  outputName?: string,
+): ConversionResult {
   const source = detectFormat(text, fileName);
   const format = target ?? (source === 'ies' ? 'ldt' : 'ies');
-  const outName = replaceExtension(fileName.split(/[\\/]/).pop() ?? fileName, format);
+  const outName = outputName ?? replaceExtension(fileName.split(/[\\/]/).pop() ?? fileName, format);
   if (source === format) throw new Error(`The file is already ${format.toUpperCase()}`);
   if (source === 'ies') {
     const { file, warnings } = iesToLdt(readIes(text), outName);

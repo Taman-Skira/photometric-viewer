@@ -3,7 +3,7 @@ import { defineConfig } from 'oxlint';
 export default defineConfig({
   plugins: ['eslint', 'typescript', 'react', 'oxc'],
   env: { browser: true },
-  ignorePatterns: ['dist'],
+  ignorePatterns: ['dist', 'dist-cli'],
   rules: {
     'react/rules-of-hooks': 'error',
     'react/exhaustive-deps': 'error',

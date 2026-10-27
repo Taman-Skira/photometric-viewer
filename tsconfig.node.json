@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "lib": ["ES2022", "DOM"],
-    "types": ["node"]
+    "types": ["node"],
+    "resolveJsonModule": true
   },
-  "include": ["tests"]
+  "include": ["cli", "tests", "vite.cli.config.ts"]
 }
