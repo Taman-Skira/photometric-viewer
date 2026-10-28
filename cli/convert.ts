@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, statSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { version } from '../package.json';
@@ -31,6 +31,13 @@ const defaultIo: Io = {
   out: (line) => process.stdout.write(`${line}\n`),
   err: (line) => process.stderr.write(`${line}\n`),
 };
+
+/** True when both paths reach the same file, including through a symlink or hard link. */
+function sameFile(a: string, b: string): boolean {
+  const sa = statSync(a, { throwIfNoEntry: false });
+  const sb = statSync(b, { throwIfNoEntry: false });
+  return !!sa && !!sb && sa.dev === sb.dev && sa.ino === sb.ino;
+}
 
 /** Runs the CLI and returns the exit code: 0 success, 1 conversion error, 2 usage error. */
 export function run(argv: string[], io: Io = defaultIo): number {
@@ -84,7 +91,7 @@ export function run(argv: string[], io: Io = defaultIo): number {
     io.err(`error: ${input} is already ${source.toUpperCase()}; give an output file with the other extension`);
     return 2;
   }
-  if (resolve(outputPath) === resolve(input)) {
+  if (resolve(outputPath) === resolve(input) || sameFile(input, outputPath)) {
     io.err('error: the output file is the input file');
     return 2;
   }
