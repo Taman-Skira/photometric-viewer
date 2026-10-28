@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, linkSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -63,6 +63,19 @@ describe('convert', () => {
     expect(readFileSync(output, 'utf8')).toBe('keep');
     expect(cli('convert', '--force', input, output)).toBe(0);
     expect(readLdt(readFileSync(output, 'utf8')).symmetry).toBe(1);
+  });
+
+  it.each([
+    ['a symlink', symlinkSync],
+    ['a hard link', linkSync],
+  ])('refuses an output that is the input through %s, even with --force', (_, link) => {
+    const input = sample('narrow-spot-downlight.ies');
+    const before = readFileSync(input, 'utf8');
+    const output = join(dir, 'alias.ldt');
+    link(input, output);
+    expect(cli('convert', '--force', input, output)).toBe(2);
+    expect(err[0]).toMatch(/output file is the input file/);
+    expect(readFileSync(input, 'utf8')).toBe(before);
   });
 
   it('suppresses warnings with --quiet', () => {
