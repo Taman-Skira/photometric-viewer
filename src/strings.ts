@@ -53,6 +53,11 @@ const copy = {
     downlight: 'Wide Downlight',
     pendant: 'Linear Pendant',
   },
+  convert: {
+    download: 'Download as {{format}}',
+    warnings: 'Converted. Some details have no place in {{format}}:',
+    error: 'Could not convert this file: {{message}}',
+  },
   notTypeC: 'This file uses Type A/B photometry; it is displayed as Type C, so orientation may be off.',
   controls: {
     height: 'Mounting height',
