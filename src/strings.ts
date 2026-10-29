@@ -1,7 +1,7 @@
 const copy = {
   title: 'Photometric Viewer',
   subtitle:
-    'Drop an IES or LDT file and see how the light actually lands: on a street, in a room, grazing a wall. Physically based and rendered live in your browser.',
+    'Drop an IES or LDT file and see how the light actually lands: on a street, in a room, grazing a wall. Physically based and rendered live in your browser. Need the other format? Convert between IES and LDT in one click.',
   privacy: 'Your files never leave your device.',
   unsupported:
     'Your browser does not support WebGL2 with float render targets, which the viewer needs. Please try a recent Chrome, Edge, Firefox or Safari.',
@@ -42,7 +42,7 @@ const copy = {
     photometry: 'Photometry',
   },
   upload: 'Open IES / LDT file',
-  uploadHint: 'Click to browse or drop a file anywhere',
+  uploadHint: 'Click to browse or drop a file anywhere. View it, or convert IES ↔ LDT',
   fileError: 'Could not read this file: {{message}}',
   samplesTitle: 'Or try a sample',
   samples: {
@@ -54,7 +54,8 @@ const copy = {
     pendant: 'Linear Pendant',
   },
   convert: {
-    download: 'Download as {{format}}',
+    download: 'Convert to {{format}} and download',
+    hint: '{{from}} → {{to}}, converted in your browser',
     warnings: 'Converted. Some details have no place in {{format}}:',
     error: 'Could not convert this file: {{message}}',
   },

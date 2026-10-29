@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download } from 'lucide-react';
+import { ArrowLeftRight, Download } from 'lucide-react';
 import { convertPhotometricText, type ConversionResult, type LoadedPhotometry } from '../photometry';
 import { tv } from '../strings';
 
@@ -34,11 +34,15 @@ export default function ConvertDownload({ photometry }: { photometry: LoadedPhot
       <button
         type="button"
         onClick={convert}
-        className="pv-press flex w-full items-center justify-center gap-2 rounded-lg bg-white/[0.07] px-3 py-2 text-xs text-white/80 transition-[background-color,color] duration-200 hover:bg-white/15 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--taman-primary)]"
+        className="pv-press flex w-full items-center justify-center gap-2 rounded-lg border border-[var(--taman-primary)]/40 bg-[var(--taman-primary)]/10 px-3 py-2 text-xs font-medium text-white transition-[background-color,border-color] duration-200 hover:border-[var(--taman-primary)] hover:bg-[var(--taman-primary)]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--taman-primary)]"
       >
-        <Download className="h-3.5 w-3.5" />
+        <ArrowLeftRight className="h-3.5 w-3.5 text-[var(--taman-primary)]" />
         {tv('convert.download', { format: target.toUpperCase() })}
+        <Download className="h-3.5 w-3.5 text-white/50" />
       </button>
+      <p className="text-center text-[11px] text-white/40">
+        {tv('convert.hint', { from: photometry.data.format.toUpperCase(), to: target.toUpperCase() })}
+      </p>
       {current?.error && <p className="text-xs text-red-300">{tv('convert.error', { message: current.error })}</p>}
       {current?.result && current.result.warnings.length > 0 && (
         <div className="text-xs text-amber-300/80">
